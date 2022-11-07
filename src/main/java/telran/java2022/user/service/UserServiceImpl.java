@@ -28,6 +28,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(LoginDto loginDto) {
+	User user = userRepository.findByLogin(loginDto.getLogin());
+	if(!user.getPassword().equals(loginDto.getPassword())) {
+	    return null;
+	}
 	return userRepository.findByLogin(loginDto.getLogin());
     }
 
